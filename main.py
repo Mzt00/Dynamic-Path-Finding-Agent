@@ -1,12 +1,12 @@
 import pygame
 import sys
 import random
-import time
 from src.core.grid import Grid
 from src.gui.renderer import Renderer
 from src.algorithms.a_star import a_star_search
 from src.algorithms.gbfs import gbfs_search
 from src.algorithms.heuristics import manhattan, euclidean
+from src.algorithms.dynamic import dynamic_obstacles
 
 def main():
     pygame.init()
@@ -17,7 +17,7 @@ def main():
     renderer = Renderer(width, height, rows, cols)
     start = (2, 2)
     goal = (rows - 2, cols - 2)
-
+    agent = Agent(start)
     #state management
     current_algo = a_star_search
     current_heuristic = manhattan
@@ -84,3 +84,19 @@ def main():
                 grid.walls.clear()
                 grid.nodes = [[0 for _ in range(COLS)] for _ in range(ROWS)]
                 path, visited, is_moving, agent_pos = [], [], False, start
+            if agent.is_moving:
+                reached_goal= agent.move()
+                if dynamic_mode:
+                    is_blocked,obs,pos = dynamic_obstacles(grid, agent.path, agent.pos, goal, rows, cols)
+                    if is_blocked: #replanning
+                        new_plan = current_algo(grid, agent.pos, goal, current_heuristic)
+                        agent.set_path(new_plan['path'])
+                        visited.extend(new_plan['visited'])
+                if reached_goal:
+                    print("RAHABAR HAS REACHED")
+            renderer.draw_grid(grid, path=agent.path, visited=visited)
+            agent.draw(renderer.screen, renderer.cell_size)
+            pygame.display.update()
+            clock.tick(12)
+if __name__ == "__main__":
+    main()
