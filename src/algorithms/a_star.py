@@ -14,7 +14,7 @@ def reconstruct_path(came_from,start,goal):
 def a_star_search(grid,start,goal,heuristic_ref):
     #heuristic_ref refers to either
     #euclidian distance or manhattan distance
-    start_time=time()
+    start_time=time.time()
     frontier = PriorityQueue()
     frontier.put(start,0)
     came_from = {start: None}
