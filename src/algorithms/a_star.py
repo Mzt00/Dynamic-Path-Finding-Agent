@@ -1,5 +1,6 @@
 import time
 from src.utils.priority_queue import PriorityQueue
+
 def reconstruct_path(came_from,start,goal):
     if goal not in came_from:
             return []
@@ -26,15 +27,18 @@ def a_star_search(grid,start,goal,heuristic_ref):
         visited_nodes.append(current)
         if current == goal:
             break
-    for next_node in grid.get_neighbours(current):
-        new_cost = cost_so_far[current]+1
-        if next_node not in cost_so_far or new_cost < cost_so_far[next_node]:
+        for next_node in grid.get_neighbours(current):
+
             dist = 1.41 if (next_node[0] != current[0] and next_node[1] != current[1]) else 1
             new_cost = cost_so_far[current] + dist
-            #f(n) = g(n) +h(n)
-            priority = new_cost + heuristic_ref(next_node,goal)
-            frontier.put(next_node,priority)
-            came_from[next_node] = current
+
+            if next_node not in cost_so_far or new_cost < cost_so_far[next_node]:
+                cost_so_far[next_node] = new_cost 
+                #f(n) = g(n) +h(n)
+                priority = new_cost + heuristic_ref(next_node,goal)
+                frontier.put(next_node,priority)
+                came_from[next_node] = current
+
     execution_time = (time.time() - start_time)*1000
     path = reconstruct_path(came_from,start,goal)
     return {
@@ -43,11 +47,3 @@ def a_star_search(grid,start,goal,heuristic_ref):
         "cost": len(path) if path else 0,
         "time": execution_time
     }
-
-   
-
-        
-    
-    
-    
- 
