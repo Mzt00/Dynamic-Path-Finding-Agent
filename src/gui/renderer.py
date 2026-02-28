@@ -1,60 +1,81 @@
-import pygame 
-WHITE  = (255, 255, 255) # Empty
-BLACK  = (0, 0, 0) # Wall
-GREEN  = (0, 255, 0)# Final Path
-RED    = (255, 0, 0)# Visited Nodes
-YELLOW = (255, 255, 0)# Frontier
-BLUE   = (0, 0, 255)# Start/Goal
+import pygame
 
 class Renderer:
-    def __init__(self,width,height,rows,cols):
-        self.cell_size = width // cols
-        self.screen = pygame.display.set_mode((width,height + 100))
+    def __init__(self, width, height, rows, cols):
+        self.width = width
+        self.height = height
+        self.rows = rows
+        self.cols = cols
+
+        self.panel_width = 250
+        self.screen = pygame.display.set_mode((width + self.panel_width, height))
         pygame.display.set_caption("RAHBARرہبر")
-    
-    def draw_grid(self, grid, path=[], visited=[]):
-        self.screen.fill(WHITE)
 
-        # visited
-        for node in visited:
-            r, c = node
-            pygame.draw.rect(
-                self.screen,
-                RED,
-                (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size),
-            )
+        self.cell_size = width // cols
 
-        # walls 
-        for r in range(grid.rows):
-            for c in range(grid.cols):
+        self.font = pygame.font.SysFont("consolas", 18)
+        self.big_font = pygame.font.SysFont("consolas", 22, bold=True)
+
+    def draw_grid(self, grid, path=None, visited=None):
+        self.screen.fill((25, 25, 35))
+
+        
+        for r in range(self.rows):
+            for c in range(self.cols):
+                rect = pygame.Rect(
+                    c * self.cell_size,
+                    r * self.cell_size,
+                    self.cell_size,
+                    self.cell_size
+                )
+
+                color = (40, 44, 60)
+
                 if (r, c) in grid.walls:
-                    pygame.draw.rect(
-                        self.screen,
-                        BLACK,
-                        (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size),
-                    )
+                    color = (20, 20, 20)
 
-        # path
-        for node in path:
-            r, c = node
-            pygame.draw.rect(
-                self.screen,
-                GREEN,
-                (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size),
-            )
+                if visited and (r, c) in visited:
+                    color = (90, 60, 140)
 
-        # grid lines
-        for i in range(grid.cols + 1):
-            pygame.draw.line(
-                self.screen,
-                BLACK,
-                (i * self.cell_size, 0),
-                (i * self.cell_size, grid.rows * self.cell_size),
-            )
-        for i in range(grid.rows + 1):
-            pygame.draw.line(
-                self.screen,
-                BLACK,
-                (0, i * self.cell_size),
-                (grid.cols * self.cell_size, i * self.cell_size),
-            )
+                if path and (r, c) in path:
+                    color = (0, 200, 150)
+
+                pygame.draw.rect(self.screen, color, rect)
+                pygame.draw.rect(self.screen, (50, 55, 75), rect, 1)
+
+        
+        panel_rect = pygame.Rect(self.width, 0, self.panel_width, self.height)
+        pygame.draw.rect(self.screen, (30, 30, 45), panel_rect)
+
+    def draw_panel(self, algo, heuristic, mode, metrics):
+        x_offset = self.width + 20
+        y = 30
+
+        title = self.big_font.render("RAHBAR Control", True, (255, 255, 255))
+        self.screen.blit(title, (x_offset, y))
+        y += 50
+
+        info_lines = [
+            f"Algorithm: {algo}",
+            f"Heuristic: {heuristic}",
+            f"Mode: {mode}",
+            "",
+            f"Visited: {metrics['visited']}",
+            f"Cost: {metrics['cost']:.2f}",
+            f"Time: {metrics['time']:.2f} ms",
+            "",
+            "Controls:",
+            "1 - A*",
+            "2 - GBFS",
+            "M - Manhattan",
+            "E - Euclidean",
+            "D - Toggle Dynamic",
+            "SPACE - Run",
+            "R - Random Map",
+            "C - Clear"
+        ]
+
+        for line in info_lines:
+            text = self.font.render(line, True, (200, 200, 220))
+            self.screen.blit(text, (x_offset, y))
+            y += 28
