@@ -6,7 +6,7 @@ from src.gui.renderer import Renderer
 from src.algorithms.a_star import a_star_search
 from src.algorithms.gbfs import gbfs_search
 from src.algorithms.heuristics import manhattan, euclidean
-from src.algorithms.dynamic import dynamic_obstacles
+from src.core.dynamic import dynamic_obstacles
 
 def main():
     pygame.init()
