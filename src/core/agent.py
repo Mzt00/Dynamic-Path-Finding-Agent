@@ -18,11 +18,11 @@ class Agent:
     
     def draw(self, screen, cell_size):
         r, c = self.pos
-    center = (
+        center = (
         c * cell_size + cell_size // 2,
         r * cell_size + cell_size // 2
-    )
-    import pygame
-    pygame.draw.circle(screen, (0, 0, 255), center, cell_size // 3)
+        )
+
+        pygame.draw.circle(screen, (0, 0, 255), center, cell_size // 3)
         
      
