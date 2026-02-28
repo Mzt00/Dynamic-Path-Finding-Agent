@@ -31,7 +31,7 @@ def gbfs_search(grid,start,goal,heuristic_ref):
         new_cost = cost_so_far[current]+1
         if next_node not in cost_so_far or new_cost < cost_so_far[next_node]:
             cost_so_far = new_cost
-            #f(n) = g(n) +h(n)
+            #only check the heuristic
         priority = heuristic_func(next_node, goal)
         frontier.put(next_node,priority)
         came_from[next_node] = current
