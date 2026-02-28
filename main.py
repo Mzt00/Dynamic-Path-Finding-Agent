@@ -66,7 +66,6 @@ def main():
                         agent.set_path(temp["path"])
                         visited = temp["visited"]
                         agent.is_moving = True
-
                         algo_name = "A*" if current_algo == a_star_search else "GBFS"
                         h_name = "Manhattan" if current_heuristic == manhattan else "Euclidean"
                         status = "DYNAMIC" if dynamic_mode else "STATIC"
