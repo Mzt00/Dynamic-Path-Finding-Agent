@@ -15,9 +15,14 @@ class Agent:
                 self.is_moving = False
                 return True 
         return False
-    def draw(self):
-        r,c = self.pos 
-        center = (c * cell_size + cell_size // 2, r * cell_size + cell_size // 2)
-        pygame.draw.circle(screen, (0, 0, 255), center, cell_size // 3)
+    
+    def draw(self, screen, cell_size):
+        r, c = self.pos
+    center = (
+        c * cell_size + cell_size // 2,
+        r * cell_size + cell_size // 2
+    )
+    import pygame
+    pygame.draw.circle(screen, (0, 0, 255), center, cell_size // 3)
         
      
