@@ -14,7 +14,7 @@ class Renderer:
         self.cell_size = width // cols
 
         self.font = pygame.font.SysFont("consolas", 18)
-        self.big_font = pygame.font.SysFont("consolas", 22, bold=True)
+        self.big_font = pygame.font.Font("assets/fonts/NotoNaskhArabic-Regular.ttf", 22)
 
         self.buttons = {
             "A*": pygame.Rect(self.width + 20, 200, 200, 40),
