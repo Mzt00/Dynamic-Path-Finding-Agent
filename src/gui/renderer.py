@@ -15,7 +15,14 @@ class Renderer:
 
         self.font = pygame.font.SysFont("consolas", 18)
         self.big_font = pygame.font.SysFont("consolas", 22, bold=True)
-
+        self.buttons = {
+            "A*": pygame.Rect(self.width + 20, 200, 200, 40),
+            "GBFS": pygame.Rect(self.width + 20, 250, 200, 40),
+            "Manhattan": pygame.Rect(self.width + 20, 300, 200, 40),
+            "Euclidean": pygame.Rect(self.width + 20, 350, 200, 40),
+            "Dynamic": pygame.Rect(self.width + 20, 400, 200, 40),
+            "Clear": pygame.Rect(self.width + 20, 450, 200, 40),
+        }
     def draw_grid(self, grid, path=None, visited=None):
         self.screen.fill((25, 25, 35))
 
@@ -79,3 +86,9 @@ class Renderer:
             text = self.font.render(line, True, (200, 200, 220))
             self.screen.blit(text, (x_offset, y))
             y += 28
+        for name, rect in self.buttons.items():
+            pygame.draw.rect(self.screen, (50, 50, 80), rect)
+            pygame.draw.rect(self.screen, (200, 200, 220), rect, 2)
+
+            txt = self.font.render(name, True, (255, 255, 255))
+            self.screen.blit(txt, (rect.x + 10, rect.y + 10))
