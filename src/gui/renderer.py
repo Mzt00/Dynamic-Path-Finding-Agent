@@ -12,25 +12,49 @@ class Renderer:
         self.screen = pygame.display.set_mode((width,height + 100))
         pygame.display.set_caption("RAHBARرہبر")
     
-    def draw_grid(self,grid,path=[],visited=[]):
+    def draw_grid(self, grid, path=[], visited=[]):
         self.screen.fill(WHITE)
-        #draw visited nodes
+
+        # visited
         for node in visited:
             r, c = node
-            pygame.draw.rect(self.screen, RED, (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size))
-            #draw walls
+            pygame.draw.rect(
+                self.screen,
+                RED,
+                (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size),
+            )
+
+        # walls 
         for r in range(grid.rows):
             for c in range(grid.cols):
-                if (r,c) in grid.nodes:
-                    pygame.draw.rect(self.screen, BLACK, (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size))
-                    #draw path
+                if (r, c) in grid.walls:
+                    pygame.draw.rect(
+                        self.screen,
+                        BLACK,
+                        (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size),
+                    )
+
+        # path
         for node in path:
             r, c = node
-            pygame.draw.rect(self.screen, GREEN, (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size))
-        #draw grid lines
-        for i in range(grid.cols + 1):
-            pygame.draw.line(self.screen, BLACK, (i * self.cell_size, 0), (i * self.cell_size, grid.rows * self.cell_size))
-        for i in range(grid.rows + 1):
-            pygame.draw.line(self.screen, BLACK, (0, i * self.cell_size), (grid.cols * self.cell_size, i * self.cell_size))
+            pygame.draw.rect(
+                self.screen,
+                GREEN,
+                (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size),
+            )
 
-        pygame.display.update()
+        # grid lines
+        for i in range(grid.cols + 1):
+            pygame.draw.line(
+                self.screen,
+                BLACK,
+                (i * self.cell_size, 0),
+                (i * self.cell_size, grid.rows * self.cell_size),
+            )
+        for i in range(grid.rows + 1):
+            pygame.draw.line(
+                self.screen,
+                BLACK,
+                (0, i * self.cell_size),
+                (grid.cols * self.cell_size, i * self.cell_size),
+            )

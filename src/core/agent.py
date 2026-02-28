@@ -5,9 +5,13 @@ class Agent:
         self.path = []
         self.is_moving = False
         
-    def set_path(self,path):
-        self.path = path
-        self.is_moving = len(path) >0
+    def set_path(self, path):
+        self.path = list(path)
+
+        if self.path and self.path[0] == self.pos:
+            self.path.pop(0)
+        self.is_moving = bool(self.path)
+        
     def move(self):
         if self.path:
             self.pos = self.path.pop(0)
@@ -25,4 +29,4 @@ class Agent:
 
         pygame.draw.circle(screen, (0, 0, 255), center, cell_size // 3)
         
-     
+    
