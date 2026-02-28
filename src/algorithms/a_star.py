@@ -29,7 +29,8 @@ def a_star_search(grid,start,goal,heuristic_ref):
     for next_node in grid.getneighbours(current):
         new_cost = cost_so_far[current]+1
         if next_node not in cost_so_far or new_cost < cost_so_far[next_node]:
-            cost_so_far = new_cost
+            dist = 1.41 if (next_node[0] != current[0] and next_node[1] != current[1]) else 1
+            new_cost = cost_so_far[current] + dist
             #f(n) = g(n) +h(n)
             priority = new_cost + heuristic_ref(next_node,goal)
             frontier.put(next_node,priority)
