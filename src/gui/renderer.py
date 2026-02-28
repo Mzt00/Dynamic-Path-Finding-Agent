@@ -21,7 +21,7 @@ class Renderer:
             #draw walls
         for r in range(grid.rows):
             for c in range(grid.cols):
-                if grid.nodes[r][c] == 1:
+                if (r,c) in grid.nodes:
                     pygame.draw.rect(self.screen, BLACK, (c * self.cell_size, r * self.cell_size, self.cell_size, self.cell_size))
                     #draw path
         for node in path:
