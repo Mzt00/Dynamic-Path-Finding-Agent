@@ -31,9 +31,9 @@ def a_star_search(grid,start,goal,heuristic_ref):
         if next_node not in cost_so_far or new_cost < cost_so_far[next_node]:
             cost_so_far = new_cost
             #f(n) = g(n) +h(n)
-        priority = new_cost + heuristic_ref(next_node,goal)
-        frontier.put(next_node,priority)
-        came_from[next_node] = current
+            priority = new_cost + heuristic_ref(next_node,goal)
+            frontier.put(next_node,priority)
+            came_from[next_node] = current
     execution_time = (time.time() - start_time)*1000
     path = reconstruct_path(came_from,start,goal)
     return {
