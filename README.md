@@ -1,51 +1,51 @@
-````markdown
-# RAHBAR (رہبر) – Dynamic Path-Finding Agent
+###RAHBAR (رہبر) – Dynamic Path-Finding Agent
 
-**RAHBAR** is an interactive Python-based visualization tool designed to demonstrate and compare pathfinding algorithms in both static and dynamic environments.
+RAHBAR is an interactive Python-based visualization tool designed to demonstrate and compare pathfinding algorithms in both static and dynamic environments.
 
 It allows users to visualize how different search strategies navigate a 2D grid while adapting to real-time environmental changes.
 
----
+#FEATURES
 
-# Features
+Algorithm Selection
+• Toggle between:
 
-## Algorithm Selection
-- Toggle between:
-  - **A\*** (Optimal Search)
-  - **Greedy Best-First Search (GBFS)**
+A* (Optimal Search)
 
-## Dual Heuristics
-- **Manhattan Distance**
-- **Euclidean Distance**
+Greedy Best-First Search (GBFS)
 
-## Dynamic Environments
-- A **Dynamic Mode** that spawns obstacles in real-time.
-- The agent automatically re-calculates its path if blocked.
+Dual Heuristics
+• Manhattan Distance
+• Euclidean Distance
 
-## Interactive Grid
-- Draw or erase walls using your mouse.
-- Create custom mazes and test cases.
+Dynamic Environments
+• A Dynamic Mode that spawns obstacles in real-time.
+• The agent automatically re-calculates its path if blocked.
 
-## Performance Metrics
-Real-time tracking of:
-- Visited nodes  
-- Path cost  
-- Execution time (in milliseconds)
+Interactive Grid
+• Draw or erase walls using your mouse.
+• Create custom mazes and test cases.
 
----
+Performance Metrics
+• Real-time tracking of:
 
-# Installation
+Visited nodes
 
-## Prerequisites
-- Python **3.10 or higher**
-- `pygame` library
+Path cost
 
-## Clone the Repository
+Execution time (in milliseconds)
 
+INSTALLATION
+
+Prerequisites
+• Python 3.10 or higher
+• pygame library
+
+Clone the Repository
+
+git clone https://github.com/Mzt00/Dynamic-Path-Finding-Agent.git
 ```bash
-git clone https://github.com/Mzt00/Dynamic-Path-Finding-Agent
 cd Dynamic-Path-Finding-Agent
-````
+```
 
 ## Install Dependencies
 
