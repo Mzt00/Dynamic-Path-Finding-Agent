@@ -1,4 +1,4 @@
-###RAHBAR (رہبر) – Dynamic Path-Finding Agent
+### RAHBAR (رہبر) – Dynamic Path-Finding Agent
 
 RAHBAR is an interactive Python-based visualization tool designed to demonstrate and compare pathfinding algorithms in both static and dynamic environments.
 
