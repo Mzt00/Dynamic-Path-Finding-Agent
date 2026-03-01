@@ -41,8 +41,9 @@ Prerequisites
 • pygame library
 
 Clone the Repository
-
+```bash
 git clone https://github.com/Mzt00/Dynamic-Path-Finding-Agent.git
+```
 ```bash
 cd Dynamic-Path-Finding-Agent
 ```
@@ -198,6 +199,3 @@ RAHBAR is designed for:
 
 * Python
 * Pygame
-
-```
-```
